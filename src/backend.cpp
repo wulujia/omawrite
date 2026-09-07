@@ -679,8 +679,10 @@ QString Backend::currentDocumentText() const {
 }
 
 int Backend::countWords(const QString &text) {
+    // Only letters and numbers: PCRE2 reads \p{Han} as Script_Extensions, which
+    // puts 。 、 「 and the CJK radicals in Han and would count each as a word.
     static const QRegularExpression cjkRe(
-        QStringLiteral("[\\p{Han}\\p{Hiragana}\\p{Katakana}]"));
+        QStringLiteral("(?=[\\p{L}\\p{N}])[\\p{Han}\\p{Hiragana}\\p{Katakana}]"));
     static const QRegularExpression wordRe(
         QStringLiteral("[\\p{L}\\p{N}]+(?:['-][\\p{L}\\p{N}]+)*"));
 
