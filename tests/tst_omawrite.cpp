@@ -29,6 +29,7 @@ private slots:
         QCOMPARE(Backend::countWords(QStringLiteral("日本語テスト")), 6);
         QCOMPARE(Backend::countWords(QStringLiteral("你好，世界。")), 4);
         QCOMPARE(Backend::countWords(QStringLiteral("コーヒー")), 4);
+        QCOMPARE(Backend::countWords(QStringLiteral("か\u3099")), 1); // が, decomposed
         QCOMPARE(Backend::countWords(QStringLiteral("𠀀𠀁 foo")), 3);
         QCOMPARE(Backend::countWords(QStringLiteral("안녕하세요 세계")), 2);
         QCOMPARE(Backend::countWords(QString()), 0);
